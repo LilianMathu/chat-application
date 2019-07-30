@@ -16,6 +16,24 @@
         <script>
         // set a variable for the socket and pass in the server location
         const socket = io('http://localhost:8080');
+
+        //set up events for the client using on and emit methods
+        //the evt(event parameter) contains the json message sent from the server
+        
+        /* Notice that when receiving messages, there is a callback function with a parameter of the 
+        message to be received
+        and when sending messages there is an object
+        */
+
+        socket.on("message-from-server", function(evt){
+            document.body.appendChild(
+                document.createTextNode(evt.greeting)
+            );
+
+            socket.emit("message-from-client", {
+                greeting: "Hello from client"
+            })
+        })
         </script>
     </body>
 
